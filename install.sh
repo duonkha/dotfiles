@@ -4,7 +4,7 @@
 cd ~
 
 # Clone the dotfiles repository
-git clone https://github.com/USERNAME/dotfiles.git
+git clone https://github.com/duonkha/dotfiles.git
 
 # Create a backup directory for existing dotfiles
 mkdir dotfiles-backup
