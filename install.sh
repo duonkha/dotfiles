@@ -31,11 +31,20 @@ backup_file() {
 create_symlink() {
   local target=$1
   local link=$2
-  if [ ! -L "$link" ]; then
-    ln -s "$target" "$link"
-    echo "Created symlink for $link"
+
+  # Convert target to an absolute path
+  local full_target_path=$(realpath "$target")
+
+  # Check if the target file exists
+  if [ -e "$full_target_path" ]; then
+    if [ ! -L "$link" ]; then
+      ln -s "$full_target_path" "$link"
+      echo "Created symlink for $link -> $full_target_path"
+    else
+      echo "Symlink for $link already exists"
+    fi
   else
-    echo "Symlink for $link already exists"
+    echo "Target $full_target_path does not exist. Skipping symlink for $link."
   fi
 }
 
